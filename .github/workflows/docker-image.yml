@@ -9,10 +9,25 @@ jobs:
   build-docker-image:
     runs-on: ubuntu-latest
 
-    steps: 
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+
       # 1. Docker 이미지 빌드
       - name: Build Docker Image
-        run: docker buildx build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-52panda-ci-test .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-52panda-ci-test .
 
       # 2. DockerHub 로그인
       - name: Docker Login
