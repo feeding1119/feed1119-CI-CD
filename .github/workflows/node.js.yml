@@ -9,17 +9,21 @@ jobs:
   build-docker-image:
     runs-on: ubuntu-latest
 
-    # 1. Docker 이미지 빌드
+    # 1. Yarn 의존성 설치
+    steps:
+    
+
+    # 2. Docker 이미지 빌드
     - name: Build Docker Image
       run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-52panda-ci-test .
 
-    # 2. DockerHub 로그인
+    # 3. DockerHub 로그인
     - name: Docker Login
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-    # 3. Docker Hub 이미지 푸시
+    # 4. Docker Hub 이미지 푸시
     - name: Push Docker Image to Docker Hub
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/github-52panda-ci-test
