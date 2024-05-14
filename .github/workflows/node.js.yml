@@ -9,22 +9,22 @@ jobs:
   build-docker-image:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+      
+
+    # 1. Yarn 의존성 설치
     steps:
-    # 1. Yarn 설치
-    - name: Install Node.js and Yarn
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: '16.x'
+        node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-
-    # 2. Yarn 의존성 설치
-    - name: Install dependencies
-      run: yarn install
-
-    # 3. 프론트엔드 애플리케이션 빌드
-    - name: Build frontend app
-      run: yarn build
-    
+    - run: yarn install
+    - run: yarn build
+    - run: yarn test
 
     # 2. Docker 이미지 빌드
     - name: Build Docker Image
