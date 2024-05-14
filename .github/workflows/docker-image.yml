@@ -22,11 +22,12 @@ jobs:
 
       # 3. 의존성 설치
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       # 4. 프론트엔드 애플리케이션 빌드
       - name: Build Frontend
         run: yarn build
+
       # 1. Docker 이미지 빌드
       - name: Build Docker Image
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-52panda-ci-test .
