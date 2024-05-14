@@ -16,15 +16,11 @@ jobs:
         with:
           node-version: '14'
 
-      # 2. Yarn 설치
-      - name: Install Yarn
-        run: npm install -g yarn@latest
-
-      # 3. 의존성 설치
+      # 2. 의존성 설치
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install 
 
-      # 4. 프론트엔드 애플리케이션 빌드
+      # 3. 프론트엔드 애플리케이션 빌드
       - name: Build Frontend
         run: yarn build
 
