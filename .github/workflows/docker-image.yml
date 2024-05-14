@@ -12,7 +12,7 @@ jobs:
     steps: 
       # 1. Docker 이미지 빌드
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-52panda-ci-test .
+        run: docker buildx build -t ${{ secrets.DOCKERHUB_USERNAME }}/github-52panda-ci-test .
 
       # 2. DockerHub 로그인
       - name: Docker Login
