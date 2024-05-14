@@ -18,11 +18,15 @@ jobs:
 
       # 2. 의존성 설치
       - name: Install dependencies
-        run: yarn install 
+        run: |
+          cd ${{ github.workspace }}  # 프로젝트의 루트 디렉토리로 이동
+          yarn install
 
       # 3. 프론트엔드 애플리케이션 빌드
       - name: Build Frontend
-        run: yarn build
+        run: |
+          cd ${{ github.workspace }}  # 프로젝트의 루트 디렉토리로 이동
+          yarn build
 
       # 1. Docker 이미지 빌드
       - name: Build Docker Image
