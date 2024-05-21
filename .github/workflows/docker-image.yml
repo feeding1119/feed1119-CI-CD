@@ -27,3 +27,17 @@ jobs:
       # 3. Docker Hub 이미지 푸시
       - name: Push Docker Image to Docker Hub
         run: docker push feed1119/github-52panda-ci-test
+
+      # 4. 다른 Git 리포지토리에 매니페스트 파일 업데이트
+      - name: Update Manifest in Another Repository
+        run: |
+          git clone https://github.com/feeding1119/feed1119-argoCd.git
+          cd your-manifests-repo
+          sed -i 's|image: feed1119/github-52panda-ci-test:.*|image: feed1119/github-52panda-ci-test:latest|' nginx-deployment.yaml
+          git config --global user.name 'feeding1119'
+          git config --global user.email 'akkaa1119@naver.com'
+          git add nginx.yaml
+          git commit -m "Update image tag to latest"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.LOGIN_TOKEN }}
