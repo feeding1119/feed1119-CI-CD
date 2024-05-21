@@ -34,6 +34,9 @@ jobs:
           git clone https://feeding1119:${{ secrets.LOGIN_TOKEN }}@github.com/feeding1119/feed1119-argoCd.git
           cd feed1119-argoCd
           sed -i 's|image: feed1119/github-52panda-ci-test:.*|image: feed1119/github-52panda-ci-test:latest|' nginx.yaml
+          git config --global user.name feeding1119
+          git config --global user.email akkaa1119@naver.com
           git add nginx.yaml
           git commit -m "Update image tag to latest"
           git push
+        
