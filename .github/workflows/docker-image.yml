@@ -33,7 +33,7 @@ jobs:
         run: |
           git clone https://github.com/feeding1119/feed1119-argoCd.git
           cd feed1119-argoCd
-          sed -i 's|image: feed1119/github-52panda-ci-test:.*|image: feed1119/github-52panda-ci-test:latest|' nginx-deployment.yaml
+          sed -i 's|image: feed1119/github-52panda-ci-test:.*|image: feed1119/github-52panda-ci-test:latest|' nginx.yaml
           git config --global user.name 'feeding1119'
           git config --global user.email 'akkaa1119@naver.com'
           git add nginx.yaml
