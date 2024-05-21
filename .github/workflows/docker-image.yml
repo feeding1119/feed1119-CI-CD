@@ -39,4 +39,5 @@ jobs:
           git add nginx.yaml
           git commit -m "Update image tag to latest"
           git push
-        
+        env:
+          GITHUB_TOKEN: ${{ secrets.LOGIN_TOKEN }}
