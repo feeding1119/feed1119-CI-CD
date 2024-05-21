@@ -32,7 +32,7 @@ jobs:
       - name: Update Manifest in Another Repository
         run: |
           git clone https://github.com/feeding1119/feed1119-argoCd.git
-          cd your-manifests-repo
+          cd feed1119-argoCd
           sed -i 's|image: feed1119/github-52panda-ci-test:.*|image: feed1119/github-52panda-ci-test:latest|' nginx-deployment.yaml
           git config --global user.name 'feeding1119'
           git config --global user.email 'akkaa1119@naver.com'
