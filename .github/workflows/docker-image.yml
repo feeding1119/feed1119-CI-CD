@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      # - name: Checkout repository
+      #   uses: actions/checkout@v2
 
-      # 1. Docker 이미지 빌드
-      - name: Build Docker Image
-        run: docker build -t feed1119/github-52panda-ci-test .
+      # # 1. Docker 이미지 빌드
+      # - name: Build Docker Image
+      #   run: docker build -t feed1119/github-52panda-ci-test .
 
-      # 2. DockerHub 로그인
-      - name: Docker Login
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      # # 2. DockerHub 로그인
+      # - name: Docker Login
+      #   uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      # 3. Docker Hub 이미지 푸시
-      - name: Push Docker Image to Docker Hub
-        run: docker push feed1119/github-52panda-ci-test
+      # # 3. Docker Hub 이미지 푸시
+      # - name: Push Docker Image to Docker Hub
+      #   run: docker push feed1119/github-52panda-ci-test
 
       # 4. 다른 Git 리포지토리에 매니페스트 파일 업데이트
       - name: Update Manifest in Another Repository
@@ -34,7 +34,7 @@ jobs:
           git clone https://github.com/feeding1119/feed1119-argoCd.git
           cd feed1119-argoCd
           sed -i 's|image: feed1119/github-52panda-ci-test:.*|image: feed1119/github-52panda-ci-test:latest|' nginx.yaml
-          git config user.name feeding1119
+          git config user.name kjh
           git config user.email akkaa1119@naver.com
           git add nginx.yaml
           git commit -m "Update image tag to latest"
